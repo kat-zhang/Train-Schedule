@@ -1,0 +1,19 @@
+body{
+    box-align: center;
+    box-sizing: border-box;
+}
+.pun {
+    font-style: italic;
+}
+.jumbotron {
+    padding: 2rem 2rem;
+    background-color: rgb(18, 160, 25);
+    color: white;
+    border-radius: .8rem;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+
+}
+.card-header {
+    color:  rgb(15, 15, 199); 
+}
