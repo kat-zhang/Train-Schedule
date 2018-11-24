@@ -8,3 +8,36 @@
     messagingSenderId: "271840703273"
   };
   firebase.initializeApp(config);
+
+var database = firebase.database();
+
+$("#add-train").on("click", function (event){
+    event.preventDefault();
+
+    var trainName = $("#train-name").val().trim();
+    var destination =$("#destination").val().trim();
+    var firstTrain = moment($("#first-train").val().trim().format("HH:MM"));
+    var frequency = $("frequency").val().trim ();
+
+    var newTrain = {
+        name: trainName,
+        destination: destination,
+        start: firstTrain,
+        freq: frequency
+    };
+
+    database.ref().push(newTrain);
+
+    console.log(newTrain.name);
+    console.log(newTrain.destination);
+    console.log(newTrain.start);
+    console.log(newTrain.freq);
+
+    alert("New train has been added");
+
+    $("#train-name").val("");
+    $("#destination").val("");
+    $("#first-train").val("");
+    $("#frequency").val("");
+
+});
