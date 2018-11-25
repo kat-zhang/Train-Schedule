@@ -17,13 +17,13 @@ $("#add-train").on("click", function (event){
     var trainName = $("#train-name").val().trim();
     var destination =$("#destination").val().trim();
     var firstTrain = $("#first-train").val().trim();
-    //var frequency = $("frequency").val().trim ();
+    var waitTime = $("#wait-time").val().trim();
 
     var newTrain = {
         name: trainName,
         destination: destination,
         first: firstTrain,
-        // freq: frequency
+        frequency: waitTime,
     };
 // push to firebase 
     database.ref().push(newTrain);
@@ -33,7 +33,7 @@ $("#add-train").on("click", function (event){
     $("#train-name").val("");
     $("#destination").val("");
     $("#first-train").val("");
-    // $("#frequency").val("");
+    $("#wait-time").val("");
 });
 
 database.ref().on("child_added", function(childSnapshot) {
@@ -42,7 +42,7 @@ database.ref().on("child_added", function(childSnapshot) {
     var trainName = childSnapshot.val().name;
     var destination =childSnapshot.val().destination;
     var firstTrain = childSnapshot.val().first;
-    var frequency = childSnapshot.val().freq;
+    var waitTime = childSnapshot.val().frequency;
 //firstTrain arrival time PLUS frequency = nextArrival
     //push back 1 year to make it come before current time
     // var fixFirstTrainTime = moment.unix(firstTrain).format("HH:mm");
@@ -64,8 +64,8 @@ database.ref().on("child_added", function(childSnapshot) {
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(destination),
-        $("<td>").text(frequency),
-        // $("<td>").text(),
+        $("<td>").text(waitTime),
+        $("<td>").text(firstTrain),
         // $("<td>").text(),
 
        
