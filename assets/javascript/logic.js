@@ -16,28 +16,23 @@ $("#add-train").on("click", function (event){
 
     var trainName = $("#train-name").val().trim();
     var destination =$("#destination").val().trim();
-    // var firstTrain = moment($("#first-train").val().trim().format("HH:MM"));
-    // var frequency = $("frequency").val().trim ();
+    var firstTrain = $("#first-train").val().trim();
+    //var frequency = $("frequency").val().trim ();
 
     var newTrain = {
         name: trainName,
         destination: destination,
-        // first: firstTrain,
+        first: firstTrain,
         // freq: frequency
     };
 // push to firebase 
     database.ref().push(newTrain);
 
-    // console.log(newTrain.name);
-    // console.log(newTrain.destination);
-    // console.log(newTrain.first);
-    // console.log(newTrain.freq);
-
     alert("New train has been added");
 
     $("#train-name").val("");
     $("#destination").val("");
-    // $("#first-train").val("");
+    $("#first-train").val("");
     // $("#frequency").val("");
 });
 
@@ -46,16 +41,18 @@ database.ref().on("child_added", function(childSnapshot) {
 
     var trainName = childSnapshot.val().name;
     var destination =childSnapshot.val().destination;
-    // var firstTrain = childSnapshot.val().first;
-    // var frequency = childSnapshot.val().freq;
-
+    var firstTrain = childSnapshot.val().first;
+    var frequency = childSnapshot.val().freq;
+//firstTrain arrival time PLUS frequency = nextArrival
+    //push back 1 year to make it come before current time
+    // var fixFirstTrainTime = moment.unix(firstTrain).format("HH:mm");
+    // var nextArrival = moment()
     // console.log(trainName);
     // console.log(destination);
     // console.log(firstTrain);
     // console.log(frequency);
 
-    //firstTrain arrival time PLUS frequency = nextArrival
-    //push back 1 year to make it come before current time
+    
     // var convertTime = moment(firstTrain, "HH:MM").subtract(1, "years");
 
     // var currentTime = moment();
@@ -67,7 +64,7 @@ database.ref().on("child_added", function(childSnapshot) {
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(destination),
-        // $("<td>").text(frequency),
+        $("<td>").text(frequency),
         // $("<td>").text(),
         // $("<td>").text(),
 
