@@ -59,7 +59,7 @@ database.ref().on("child_added", function(childSnapshot) {
         $("<td>").text(trainName),
         $("<td>").text(destination),
         $("<td>").text(waitTime),
-        $("<td>").text(moment(nextTrain).format("hh:mm")),
+        $("<td>").text(moment(nextTrain).format("HH:mm")),
     );
 
     $("#train-table > tbody").append(newRow);
